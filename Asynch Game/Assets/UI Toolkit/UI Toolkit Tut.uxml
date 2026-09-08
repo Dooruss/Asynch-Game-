@@ -1,0 +1,10 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit%20Tut.uss?fileID=7433441132597879392&amp;guid=5064e9fd08057204b92f49549bedd95e&amp;type=3#UI Toolkit Tut"/>
+    <ui:VisualElement name="Root" class="root" style="flex-grow: 1;">
+        <ui:VisualElement name="MainPanel" class="main-panel">
+            <ui:Label text="Welcome, Please login to continue" name="WelcomeLabel"/>
+            <ui:TextField label="Username" placeholder-text="filler text" name="NameField"/>
+            <ui:Button text="Submit" name="SubmitButton"/>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
