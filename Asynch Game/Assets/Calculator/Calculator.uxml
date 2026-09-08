@@ -1,24 +1,24 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:VisualElement style="flex-grow: 1; background-color: rgb(0, 0, 0);">
+    <ui:VisualElement name="Root" style="flex-grow: 1; background-color: rgb(0, 0, 0);">
         <ui:VisualElement name="Result" style="flex-grow: 1; width: 349px; background-color: rgb(143, 126, 57); height: 0; min-width: 1px; min-height: 1px; max-height: 50px; max-width: 349px;">
             <ui:Label text="...." name="Result_Text" style="height: 42px; width: 343px; background-color: rgba(211, 203, 159, 0.455);"/>
         </ui:VisualElement>
         <ui:VisualElement name="Buttons" style="flex-grow: 1;">
-            <ui:Button text="1" name="Number" style="height: 45px; width: 46px; position: absolute;"/>
-            <ui:Button text="2" name="Number" style="height: 45px; width: 46px; transform-origin: center; position: absolute; top: 0; left: 54px;"/>
-            <ui:Button text="3" name="Number" style="height: 45px; width: 46px; position: absolute; top: 0; left: 110px;"/>
-            <ui:Button text="4" name="Number" style="height: 45px; width: 46px; transform-origin: center; position: absolute; top: 0; left: 163px;"/>
-            <ui:Button text="5" name="Number" style="height: 45px; width: 46px; transform-origin: center; position: absolute; top: 0; left: 217px;"/>
-            <ui:Button text="6" name="Number" style="height: 45px; width: 46px; transform-origin: center; position: absolute; top: 0; left: 271px;"/>
-            <ui:Button text="7" name="Number" style="height: 45px; width: 46px; position: absolute; top: 53px; left: 0;"/>
-            <ui:Button text="8" name="Number" style="height: 45px; width: 46px; position: absolute; top: 53px; left: 55px;"/>
-            <ui:Button text="9" name="Number" style="height: 45px; width: 46px; position: absolute; top: 53px; left: 110px;"/>
-            <ui:Button text="0" name="Number" style="height: 45px; width: 46px; position: absolute; top: 53px; left: 162px;"/>
-            <ui:Button text="+" name="Action" style="height: 45px; width: 46px; position: absolute; top: 122px; left: -1px;"/>
-            <ui:Button text="-" name="Action" style="height: 45px; width: 46px; position: absolute; top: 122px; left: 52px;"/>
-            <ui:Button text="x" name="Action" style="height: 45px; width: 46px; position: absolute; top: 122px; left: 106px;"/>
-            <ui:Button text="/" name="Action" style="height: 45px; width: 46px; position: absolute; top: 122px; left: 158px;"/>
-            <ui:Button text="=" name="Action" style="height: 45px; width: 46px; position: absolute; top: 122px; left: 212px;"/>
+            <ui:Button text="1" name="Number_1Button" style="height: 45px; width: 46px; position: absolute;"/>
+            <ui:Button text="2" name="Number_2Button" style="height: 45px; width: 46px; transform-origin: center; position: absolute; top: 0; left: 54px;"/>
+            <ui:Button text="3" name="Number_3Button" style="height: 45px; width: 46px; position: absolute; top: 0; left: 110px;"/>
+            <ui:Button text="4" name="Number_4Button" style="height: 45px; width: 46px; transform-origin: center; position: absolute; top: 0; left: 163px;"/>
+            <ui:Button text="5" name="Number_5Button" style="height: 45px; width: 46px; transform-origin: center; position: absolute; top: 0; left: 217px;"/>
+            <ui:Button text="6" name="Number_6Button" style="height: 45px; width: 46px; transform-origin: center; position: absolute; top: 0; left: 271px;"/>
+            <ui:Button text="7" name="Number_7Button" style="height: 45px; width: 46px; position: absolute; top: 53px; left: 0;"/>
+            <ui:Button text="8" name="Number_8Button" style="height: 45px; width: 46px; position: absolute; top: 53px; left: 55px;"/>
+            <ui:Button text="9" name="Number_9Button" style="height: 45px; width: 46px; position: absolute; top: 53px; left: 110px;"/>
+            <ui:Button text="0" name="Number_0Button" style="height: 45px; width: 46px; position: absolute; top: 53px; left: 162px;"/>
+            <ui:Button text="+" name="PlusButton" style="height: 45px; width: 46px; position: absolute; top: 122px; left: -1px;"/>
+            <ui:Button text="-" name="MinusButton" style="height: 45px; width: 46px; position: absolute; top: 122px; left: 52px;"/>
+            <ui:Button text="x" name="TimesButton" style="height: 45px; width: 46px; position: absolute; top: 122px; left: 106px;"/>
+            <ui:Button text="/" name="DivideButton" style="height: 45px; width: 46px; position: absolute; top: 122px; left: 158px;"/>
+            <ui:Button text="=" name="SubmitButton" style="height: 45px; width: 46px; position: absolute; top: 122px; left: 212px;"/>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
