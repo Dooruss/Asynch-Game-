@@ -1,0 +1,8 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/_JSON/PlayerDisplayWindow.uss?fileID=7433441132597879392&amp;guid=37e5f0d97c50df04db663a8543b27c21&amp;type=3#PlayerDisplayWindow"/>
+    <ui:VisualElement class="row">
+        <ui:Label text="First Label" name="FirstLabel"/>
+        <ui:Label text="Second Label" name="SecondLabel"/>
+        <ui:Label text="Third Label" name="ThirdLabel"/>
+    </ui:VisualElement>
+</ui:UXML>
