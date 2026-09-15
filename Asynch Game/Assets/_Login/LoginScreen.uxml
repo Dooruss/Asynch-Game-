@@ -1,0 +1,17 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/_UI%20Toolkit%20Tut/UI%20Toolkit%20Tut.uss?fileID=7433441132597879392&amp;guid=5064e9fd08057204b92f49549bedd95e&amp;type=3#UI Toolkit Tut"/>
+    <ui:VisualElement name="Main-Panel" style="flex-grow: 1; background-color: rgb(255, 255, 255); position: absolute; height: 497px; width: 348px;">
+        <ui:VisualElement name="Top_part" style="flex-grow: 1; position: absolute; height: 28px; width: 349px; background-color: rgba(134, 133, 133, 0.502); top: 0; left: 0;">
+            <ui:Label text="Login!" name="Text_Login" style="position: absolute; top: -9px; left: 1px; width: 341px; -unity-text-align: upper-center; font-size: 20px; -unity-font-style: bold;"/>
+        </ui:VisualElement>
+        <ui:VisualElement name="Middle_part" style="flex-grow: 1; position: absolute; height: 267px; width: 324px; top: 58px; left: 13px;">
+            <ui:TextField label="Email" placeholder-text="Enter your email...." name="Email_Textfield" style="position: absolute; top: 1px; left: 1px; flex-direction: column; height: 72px; width: 235px; -unity-font-style: bold;"/>
+            <ui:TextField label="password" placeholder-text="Enter your password...." name="Password_TextField" style="position: absolute; top: 97px; left: 2px; flex-direction: column; height: 72px; width: 235px; -unity-font-style: bold;"/>
+        </ui:VisualElement>
+        <ui:VisualElement name="Bottom_part" style="flex-grow: 1; width: 344px; position: absolute; height: 181px; top: 256px; left: 2px;">
+            <ui:Button text="Submit" name="Button_Submit" style="position: absolute; top: 48px; left: 39px; height: 40px; width: 124px;"/>
+            <ui:Button text="Create Account" name="Button_CreateAccount" style="position: absolute; top: 48px; left: 177px; height: 40px; width: 124px;"/>
+            <ui:HelpBox text="Error Message will appear here" style="position: absolute; top: 116px; left: 2px; width: 330px;"/>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

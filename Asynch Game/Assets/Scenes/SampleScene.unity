@@ -639,9 +639,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerDisplayWindow
   RoyalData:
-    username: Test
-    score: 23333
-    favoriteUnit: House Cat
+    entries: []
   rowAsset: {fileID: 9197481963319205126, guid: e97df7136aabd3545bb7298b7851f791, type: 3}
   json: "{\r\n    \"entries\": [\r\n        {\r\n            \"username\": \"King Francis the Drunk\",\r\n            \"score\": 8734,\r\n            \"favoriteUnit\": \"House Cat\"\r\n        },\r\n        {\r\n            \"username\": \"Queen Mildred the Merciless\",\r\n            \"score\": 6241,\r\n            \"favoriteUnit\": \"Paladin\"\r\n        },\r\n        {\r\n            \"username\": \"Lord Cedric the Questionable\",\r\n            \"score\": 3917,\r\n            \"favoriteUnit\": \"Goblin\"\r\n        },\r\n        {\r\n            \"username\": \"Lady Beatrice the Bold\",\r\n            \"score\": 7450,\r\n            \"favoriteUnit\": \"Knight\"\r\n        },\r\n        {\r\n            \"username\": \"Duke Reginald the Unwashed\",\r\n            \"score\": 126,\r\n            \"favoriteUnit\": \"Donkey\"\r\n        },\r\n        {\r\n            \"username\": \"Count Oswald the Pale\",\r\n            \"score\": 5823,\r\n            \"favoriteUnit\": \"Necromancer\"\r\n        },\r\n        {\r\n            \"username\": \"Duchess Matilda the Magnificent\",\r\n            \"score\": 9102,\r\n            \"favoriteUnit\": \"Red Dragon\"\r\n        },\r\n        {\r\n            \"username\": \"Lord Bartholomew the Suspicious\",\r\n            \"score\": 2187,\r\n            \"favoriteUnit\": \"Rat\"\r\n        },\r\n        {\r\n            \"username\": \"King Edmund the Unreasonably Loud\",\r\n            \"score\": 6639,\r\n            \"favoriteUnit\": \"Barbarian\"\r\n        },\r\n        {\r\n            \"username\": \"Lady Agatha the Crow Whisperer\",\r\n            \"score\": 4711,\r\n            \"favoriteUnit\": \"Giant Raven\"\r\n        },\r\n        {\r\n            \"username\": \"Count Godfrey the Slightly Damp\",\r\n            \"score\": 37,\r\n            \"favoriteUnit\": \"Troglodyte\"\r\n        },\r\n        {\r\n            \"username\": \"Queen Eleanor the Radiant\",\r\n            \"score\": 9987,\r\n            \"favoriteUnit\": \"Cleric\"\r\n        },\r\n        {\r\n            \"username\": \"Duke Percival the Overconfident\",\r\n            \"score\": 3544,\r\n            \"favoriteUnit\": \"Griffin\"\r\n        },\r\n        {\r\n            \"username\": \"Lord Alaric the Rat King\",\r\n            \"score\": 777,\r\n            \"favoriteUnit\": \"Giant Rat\"\r\n        },\r\n        {\r\n            \"username\": \"Lady Winifred the Unfortunate\",\r\n            \"score\": 1604,\r\n            \"favoriteUnit\": \"Peasant\"\r\n        },\r\n        {\r\n            \"username\": \"Count Theobald the Stonehearted\",\r\n            \"score\": 8215,\r\n            \"favoriteUnit\": \"Stone Golem\"\r\n        },\r\n        {\r\n            \"username\": \"Duchess Hildegard the Goat Herder\",\r\n            \"score\": 4320,\r\n            \"favoriteUnit\": \"War Goat\"\r\n        },\r\n        {\r\n            \"username\": \"King \xC6thelred the Probably Ready\",\r\n            \"score\": 569,\r\n            \"favoriteUnit\": \"Spearman\"\r\n        },\r\n        {\r\n            \"username\": \"Lord Archibald the Dragon Botherer\",\r\n            \"score\": 6891,\r\n            \"favoriteUnit\": \"Medusa\"\r\n        },\r\n        {\r\n            \"username\": \"Queen Gwendolyn the Eternal\",\r\n            \"score\": 9366,\r\n            \"favoriteUnit\": \"Ancient Lich\"\r\n        }\r\n    ]\r\n}"
 --- !u!1 &1224967654
@@ -660,7 +658,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1224967655
 MonoBehaviour:
   m_ObjectHideFlags: 0

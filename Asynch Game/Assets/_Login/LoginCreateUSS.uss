@@ -1,0 +1,11 @@
+.root {
+
+	flex-grow: 1; /* Gebruik alle beschikbare ruimte binnen het parent-element. */
+	justify-content: center;
+	align-items: center;
+}
+
+.main-panel {
+	width: 400px;
+	background-color: grey;
+}
