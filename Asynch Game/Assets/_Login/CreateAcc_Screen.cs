@@ -1,11 +1,11 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class LoginScreen : MonoBehaviour
+public class CreateAccountScreen : MonoBehaviour
 {
-    [SerializeField] private GameObject createAccountWindow;
+    [SerializeField] private GameObject LoginWindow;
     private PanelRenderer panelRenderer;
-    private Button CreateAccButton;
+    private Button BackButton;
     private void OnEnable()
     {
         panelRenderer = GetComponent<PanelRenderer>();
@@ -20,7 +20,7 @@ public class LoginScreen : MonoBehaviour
 
     private void OnUIReload(PanelRenderer panelRenderer, VisualElement rootElement, int version)
     {
-        CreateAccButton = rootElement.Q<Button>("Button_CreateAccount");
+        BackButton = rootElement.Q<Button>("Button_back");
 
         UnregisterCallbacks();
         RegisterCallbacks();
@@ -28,20 +28,20 @@ public class LoginScreen : MonoBehaviour
 
     private void RegisterCallbacks()
     {
-        CreateAccButton.clicked += OnCreateAccountClicked;
+        BackButton.clicked += OnBackClicked;
     }
 
     private void UnregisterCallbacks()
     {
-        if (CreateAccButton != null)
+        if (BackButton != null)
         {
-            CreateAccButton.clicked -= OnCreateAccountClicked;
+            BackButton.clicked -= OnBackClicked;
         }
     }
 
-    private void OnCreateAccountClicked()
+    private void OnBackClicked()
     {
-        createAccountWindow.SetActive(true);
+        LoginWindow.SetActive(true);
         gameObject.SetActive(false);
     }
 }
