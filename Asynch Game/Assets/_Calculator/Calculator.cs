@@ -1,6 +1,8 @@
 using System;
 using UnityEngine;
 using UnityEngine.UIElements;
+using System.Text;
+using UnityEngine.Networking;
 
 [Serializable]
 public class CalculateRequest
@@ -32,6 +34,7 @@ public class Calculator : MonoBehaviour
     private int secondNumber;
     private int Results;
     //Other buttons
+    private Label resultLabel;
     private Button submitButton;
     private Button PlusButton;
     private Button MinusButton;
@@ -93,6 +96,7 @@ public class Calculator : MonoBehaviour
         Number_8Button = rootElement.Q<Button>("Number_8Button");
         Number_9Button = rootElement.Q<Button>("Number_9Button");
         Number_0Button = rootElement.Q<Button>("Number_0Button");
+        resultLabel = rootElement.Q<Label>("Result_Text");
 
         // Verwijder eerst eventuele oude callbacks om te voorkomen dat dezelfde
         // callback meerdere keren geregistreerd staat als de UI opnieuw wordt geladen.
@@ -145,87 +149,136 @@ public class Calculator : MonoBehaviour
         if (DivideButton != null) { DivideButton.clicked -= OnDivideButtonClicked; }
         if (TimesButton != null) { TimesButton.clicked -= OnTimesButtonClicked; }
     }
-    private void OnSubmitButtonClicked()
+    private async void OnSubmitButtonClicked()
     {
-        // Bereken en toon resultaat op basis van de gekozen operator.
-        switch (currentOperator)
+        string operationString = currentOperator switch
         {
-            case Operator.Add:
-                Results = firstNumber + secondNumber;
-                break;
-            case Operator.Subtract:
-                Results = firstNumber - secondNumber;
-                break;
-            case Operator.Divide:
-                Results = firstNumber / secondNumber;
-                break;
-            case Operator.Multiply:
-                Results = firstNumber * secondNumber;
-                break;
-            default:
-                Results = firstNumber;
-                break;
-        }
+            Operator.Add => "add",
+            Operator.Subtract => "subtract",
+            Operator.Multiply => "multiply",
+            Operator.Divide => "divide",
+            _ => "none"
+        };
 
-        Debug.Log($"The answer equals: {Results}");
+        CalculateRequest requestData = new CalculateRequest
+        {
+            action = "calculate",
+            numberA = firstNumber,
+            numberB = secondNumber,
+            operation = operationString
+        };
+
+        string json = JsonUtility.ToJson(requestData);
+
+        using UnityWebRequest request = new UnityWebRequest(ApiUrl, UnityWebRequest.kHttpVerbPOST);
+        byte[] body = Encoding.UTF8.GetBytes(json);
+        request.uploadHandler = new UploadHandlerRaw(body);
+        request.downloadHandler = new DownloadHandlerBuffer();
+        request.SetRequestHeader("Content-Type", "application/json");
+
+        // Verstuur het request en wacht op de response
+        await request.SendWebRequest();
+
+        // Lees response en zet om naar object.
+        string responseJson = request.downloadHandler.text;
+        try
+        {
+            response = JsonUtility.FromJson<CalculateResponse>(responseJson);
+            if (response != null)
+            {
+                Results = response.result;
+                Debug.Log($"Server response: success={response.success}, result={response.result}");
+                UpdateResultLabel();
+            }
+            else
+            {
+                Debug.LogWarning($"Failed");
+            }
+        }
+        // wtf doet dit
+        catch (Exception ex)
+        {
+            Debug.LogError($"Error parsing response: {ex.Message}");
+        }
 
         // Reset state zodat gebruiker opnieuw kan rekenen
         firstNumber = 0;
         secondNumber = 0;
         currentOperator = Operator.None;
+        UpdateResultLabel();
     }
 
     #region // Numbers
     private void OnNumber_1ButtonClicked()
     {
+        MaybeClearResponse();
         // Als er al een operator gekozen is, wordt dit het tweede getal.
-        if (currentOperator != Operator.None) { secondNumber = 1; }
-        else { firstNumber = 1; }
+        if (currentOperator != Operator.None) { secondNumber = secondNumber * 10 + 1; }
+        else { firstNumber = firstNumber * 10 + 1; }
+        UpdateResultLabel();
     }
     private void OnNumber_2ButtonClicked()
     {
-        if (currentOperator != Operator.None) { secondNumber = 2; }
-        else { firstNumber = 2; }
+        MaybeClearResponse();
+        if (currentOperator != Operator.None) { secondNumber = secondNumber * 10 + 2; }
+        else { firstNumber = firstNumber * 10 + 2; }
+        UpdateResultLabel();
     }
     private void OnNumber_3ButtonClicked()
     {
-        if (currentOperator != Operator.None) { secondNumber = 3; }
-        else { firstNumber = 3; }
+        MaybeClearResponse();
+        if (currentOperator != Operator.None) { secondNumber = secondNumber * 10 + 3; }
+        else { firstNumber = firstNumber * 10 + 3; }
+        UpdateResultLabel();
     }
     private void OnNumber_4ButtonClicked()
     {
-        if (currentOperator != Operator.None) { secondNumber = 4; }
-        else { firstNumber = 4; }
+        MaybeClearResponse();
+        if (currentOperator != Operator.None) { secondNumber = secondNumber * 10 + 4; }
+        else { firstNumber = firstNumber * 10 + 4; }
+        UpdateResultLabel();
     }
     private void OnNumber_5ButtonClicked()
     {
-        if (currentOperator != Operator.None) { secondNumber = 5; }
-        else { firstNumber = 5; }
+        MaybeClearResponse();
+        if (currentOperator != Operator.None) { secondNumber = secondNumber * 10 + 5; }
+        else { firstNumber = firstNumber * 10 + 5; }
+        UpdateResultLabel();
     }
     private void OnNumber_6ButtonClicked()
     {
-        if (currentOperator != Operator.None) { secondNumber = 6; }
-        else { firstNumber = 6; }
+        MaybeClearResponse();
+        if (currentOperator != Operator.None) { secondNumber = secondNumber * 10 + 6; }
+        else { firstNumber = firstNumber * 10 + 6; }
+        UpdateResultLabel();
     }
     private void OnNumber_7ButtonClicked()
     {
-        if (currentOperator != Operator.None) { secondNumber = 7; }
-        else { firstNumber = 7; }
+        MaybeClearResponse();
+        if (currentOperator != Operator.None) { secondNumber = secondNumber * 10 + 7; }
+        else { firstNumber = firstNumber * 10 + 7; }
+        UpdateResultLabel();
     }
     private void OnNumber_8ButtonClicked()
     {
-        if (currentOperator != Operator.None) { secondNumber = 8; }
-        else { firstNumber = 8; }
+        MaybeClearResponse();
+        if (currentOperator != Operator.None) { secondNumber = secondNumber * 10 + 8; }
+        else { firstNumber = firstNumber * 10 + 8; }
+        UpdateResultLabel();
     }
     private void OnNumber_9ButtonClicked()
     {
-        if (currentOperator != Operator.None) { secondNumber = 9; }
-        else { firstNumber = 9; }
+        MaybeClearResponse();
+        if (currentOperator != Operator.None) { secondNumber = secondNumber * 10 + 9; }
+        else { firstNumber = firstNumber * 10 + 9; }
+        UpdateResultLabel();
     }
     private void OnNumber_0ButtonClicked()
     {
-        if (currentOperator != Operator.None) { secondNumber = 0; }
-        else { firstNumber = 0; }
+        MaybeClearResponse();
+        if (currentOperator != Operator.None) { secondNumber = secondNumber * 10 + 0; }
+        else { firstNumber = firstNumber * 10 + 0; }
+        UpdateResultLabel();
     }
     #endregion
 
@@ -249,4 +302,64 @@ public class Calculator : MonoBehaviour
         currentOperator = Operator.Multiply;
     }
     #endregion
+
+    // Clear stored server response when the user starts typing a new number
+    private void MaybeClearResponse()
+    {
+        if (response != null && response.success && currentOperator == Operator.None && firstNumber == 0 && secondNumber == 0)
+        {
+            response = null;
+            Results = 0;
+        }
+    }
+
+    // Update the result label to show the currently typed number plus the last result
+    private void UpdateResultLabel()
+    {
+        if (resultLabel == null) return;
+
+        // If there's a recent successful server response and the user is not typing a new input,
+        // show the full calculation returned by the server.
+        if (response != null && response.success && currentOperator == Operator.None && firstNumber == 0 && secondNumber == 0)
+        {
+            string op = GetSymbol(response.operation);
+            resultLabel.text = $"{response.numberA} {op} {response.numberB} = {response.result}";
+            return;
+        }
+
+        // If an operator is selected, show the current expression being typed.
+        if (currentOperator != Operator.None)
+        {
+            string op = GetSymbol(currentOperator);
+            resultLabel.text = $"{firstNumber} {op} {secondNumber}";
+            return;
+        }
+
+        // Default: show the currently typed first number (or 0).
+        resultLabel.text = firstNumber.ToString();
+    }
+
+    private string GetSymbol(Operator op)
+    {
+        return op switch
+        {
+            Operator.Add => "+",
+            Operator.Subtract => "-",
+            Operator.Multiply => "×",
+            Operator.Divide => "/",
+            _ => ""
+        };
+    }
+
+    private string GetSymbol(string operation)
+    {
+        return operation switch
+        {
+            "add" => "+",
+            "subtract" => "-",
+            "multiply" => "×",
+            "divide" => "/",
+            _ => "?",
+        };
+    }
 }
