@@ -1,8 +1,30 @@
+using System;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+[Serializable]
+public class CalculateRequest
+{
+    public string action;
+    public int numberA;
+    public int numberB;
+    public string operation;
+}
+
+[Serializable]
+public class CalculateResponse
+{
+    public bool success;
+    public int numberA;
+    public int numberB;
+    public string operation;
+    public int result;
+}
+
 public class Calculator : MonoBehaviour
 {
+    private const string ApiUrl = "http://localhost/CalculatorCalculate.php";
+    [SerializeField] private CalculateResponse response;
     private PanelRenderer panelRenderer;
 
     // Referenties naar de UI-elementen die we vanuit C# willen gebruiken.
