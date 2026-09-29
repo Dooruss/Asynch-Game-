@@ -9,7 +9,9 @@ public class PlayerDisplayWindow : MonoBehaviour
     // Een UI Document voeg je toe als een VisualTreeAsset in de inspector.
     [SerializeField] private VisualTreeAsset rowAsset;
     [TextArea(4, 10)] public string json;
+    [SerializeField] private GetPlayersResponse getPlayersResponse;
 
+    // UI-elementen
     private PanelRenderer panelRenderer;
     private ScrollView scrollView;
     private Button refreshButton;
@@ -77,23 +79,31 @@ public class PlayerDisplayWindow : MonoBehaviour
         if (deleteButton != null) { deleteButton.clicked -= OnDeleteClicked; }
     }
 
-    private void OnRefreshClicked()
+    public void Refresh(GetPlayersResponse response)
     {
-        scrollView.Clear();
 
-        for (int i = 0; i < RoyalData.entries.Length; i++)
+        for (int i = 0; i < response.entries.Count; i++)
         {
-
             // Maak een nieuwe rij aan door de VisualTreeAsset te klonen
-            entries DataNumber = RoyalData.entries[i];
+            PlayerEntry DataNumber = response.entries[i];
             VisualElement row = rowAsset.CloneTree();
-            row.Q<Label>("FirstLabel").text = DataNumber.ID.ToString();
+            row.Q<Label>("FirstLabel").text = DataNumber.id.ToString();
             row.Q<Label>("SecondLabel").text = DataNumber.username;
             row.Q<Label>("ThirdLabel").text = DataNumber.score.ToString();
             row.Q<Label>("FourthLabel").text = DataNumber.favoriteUnit;
 
             // Voeg de rij toe aan de ScrollView
             scrollView.Add(row);
+           
+        }
+    }
+    private async void OnRefreshClicked()
+    {
+        getPlayersResponse = await GenericApiClient.Instance.GetPlayers();
+        scrollView?.Clear();
+        if (getPlayersResponse != null)
+        {
+            Refresh(getPlayersResponse);
         }
     }
 
@@ -155,22 +165,48 @@ public class PlayerDisplayWindow : MonoBehaviour
             return;
         }
 
-        RoyalData.entries = RoyalData.entries.Select(entry =>
+        if (!int.TryParse(scoreText, out int newScore))
         {
-            if (entry.ID == id)
-            {
-                if (int.TryParse(scoreText, out int newScore))
-                {
-                    entry.score = newScore;
-                }
-            }
-            return entry;
-        }).ToArray();
+            Debug.LogError("Invalid score for update.");
+            return;
+        }
+
+        // Call API to update the player on the server, then refresh from server
+        UpdateScoreField.value = string.Empty;
+        UpdateIDField.value = string.Empty;
+
+        _ = UpdatePlayerAndRefreshAsync(id, newScore);
+
 
         UpdateIDField.value = string.Empty;
         UpdateScoreField.value = string.Empty;
         OnRefreshClicked();
 
+    }
+
+    private async Awaitable UpdatePlayerAndRefreshAsync(int id, int newScore)
+    {
+        var updateResponse = await GenericApiClient.Instance.UpdatePlayer(id, newScore);
+
+        if (updateResponse == null)
+        {
+            Debug.LogError("Update request failed or returned no response.");
+            return;
+        }
+
+        if (!updateResponse.success)
+        {
+            Debug.LogError($"Update failed: {updateResponse.message} {updateResponse.error}");
+            return;
+        }
+
+        // After successful update, fetch latest players and refresh UI
+        getPlayersResponse = await GenericApiClient.Instance.GetPlayers();
+        scrollView?.Clear();
+        if (getPlayersResponse != null)
+        {
+            Refresh(getPlayersResponse);
+        }
     }
 
     private void OnDeleteClicked()

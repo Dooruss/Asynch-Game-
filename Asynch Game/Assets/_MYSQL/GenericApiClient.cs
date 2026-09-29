@@ -36,6 +36,19 @@ public class GenericApiClient
         return await SendRequest<GetPlayersResponse>(request);
     }
 
+    // Update an existing player's score on the server
+    public async Awaitable<UpdatePlayerResponse> UpdatePlayer(int id, int score)
+    {
+        UpdatePlayerRequest request = new UpdatePlayerRequest
+        {
+            action = "update_player",
+            id = id,
+            score = score
+        };
+
+        return await SendRequest<UpdatePlayerResponse>(request);
+    }
+
     // De generieke SendRequest method
     private async Awaitable<TResponse> SendRequest<TResponse>(object requestData)
         where TResponse : ResponseBase
