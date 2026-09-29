@@ -49,6 +49,17 @@ public class GenericApiClient
         return await SendRequest<UpdatePlayerResponse>(request);
     }
 
+    public async Awaitable<CreatePlayerResponse> CreatePlayer(string username, int score, string favoriteUnit)
+    {
+        CreatePlayerRequest request = new CreatePlayerRequest
+        {
+            action = "create_player",
+            username = username,
+            score = score,
+            favoriteUnit = favoriteUnit
+        };
+        return await SendRequest<CreatePlayerResponse>(request);
+    }
     // De generieke SendRequest method
     private async Awaitable<TResponse> SendRequest<TResponse>(object requestData)
         where TResponse : ResponseBase

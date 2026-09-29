@@ -114,42 +114,16 @@ public class PlayerDisplayWindow : MonoBehaviour
         string scoreText = InsertScoreField?.value?.Trim();
         string favoriteUnit = InsertFavoriteUnitField?.value?.Trim();
 
-        if (RoyalData == null)
-        {
-            RoyalData = new playerData { entries = new entries[0] };
-        }
-
-        if (!int.TryParse(scoreText, out int score))
-        {
-            // fallback naar 0 als parsing niet lukt
-            score = 0;
-        }
-
-        int newId = 1;
-        if (RoyalData.entries != null && RoyalData.entries.Length > 0)
-        {
-            newId = RoyalData.entries.Max(e => e.ID) + 1;
-        }
-
-        var newEntry = new entries
-        {
-            ID = newId,
-            username = username,
-            score = score,
-            favoriteUnit = favoriteUnit
-        };
-
-        var list = new List<entries>(RoyalData.entries ?? new entries[0]);
-        list.Add(newEntry);
-        RoyalData.entries = list.ToArray();
-
-        // Optioneel: reset invoervelden
+        //reset invoervelden
         InsertUsernameField.value = string.Empty;
         InsertScoreField.value = string.Empty;
         InsertFavoriteUnitField.value = string.Empty;
 
-        Debug.Log($"Inserted player: {newEntry.username} (ID={newEntry.ID})");
+        _ = InsertPlayerAndRefreshAsync(username, scoreText , favoriteUnit);
 
+        InsertUsernameField.value = string.Empty;
+        InsertScoreField.value = string.Empty;
+        InsertFavoriteUnitField.value = string.Empty;
         OnRefreshClicked();
     }
 
@@ -201,6 +175,33 @@ public class PlayerDisplayWindow : MonoBehaviour
         }
 
         // After successful update, fetch latest players and refresh UI
+        getPlayersResponse = await GenericApiClient.Instance.GetPlayers();
+        scrollView?.Clear();
+        if (getPlayersResponse != null)
+        {
+            Refresh(getPlayersResponse);
+        }
+    }
+
+    private async Awaitable InsertPlayerAndRefreshAsync(string username, string scoreText, string favoriteUnit)
+    {
+        if (!int.TryParse(scoreText, out int score))
+        {
+            Debug.LogError("Invalid score for insert.");
+            return;
+        }
+        var insertResponse = await GenericApiClient.Instance.CreatePlayer(username, score, favoriteUnit);
+        if (insertResponse == null)
+        {
+            Debug.LogError("Insert request failed or returned no response.");
+            return;
+        }
+        if (!insertResponse.success)
+        {
+            Debug.LogError($"Insert failed: {insertResponse.message} {insertResponse.error}");
+            return;
+        }
+        // After successful insert, fetch latest players and refresh UI
         getPlayersResponse = await GenericApiClient.Instance.GetPlayers();
         scrollView?.Clear();
         if (getPlayersResponse != null)
