@@ -14,6 +14,15 @@ public class PlayerDisplayWindow : MonoBehaviour
     private Button insertButton;
     private Button updateButton;
     private Button deleteButton;
+    //insert
+    private TextField InsertUsernameField;
+    private TextField InsertScoreField;
+    private TextField InsertFavoriteUnitField;
+    //update
+    private TextField UpdateUsernameField;
+    private TextField UpdateScoreField;
+    //delete
+    private TextField DeleteIDField;
 
     private void Start()
     {
@@ -38,6 +47,13 @@ public class PlayerDisplayWindow : MonoBehaviour
         insertButton = rootElement.Q<Button>("InsertButton");
         updateButton = rootElement.Q<Button>("UpdateButton");
         deleteButton = rootElement.Q<Button>("DeleteButton");
+        //textfields
+        InsertUsernameField = rootElement.Q<TextField>("InsertUsernameField");
+        InsertScoreField = rootElement.Q<TextField>("InsertScoreField");
+        InsertFavoriteUnitField = rootElement.Q<TextField>("InsertFavoriteUnitField");
+        UpdateUsernameField = rootElement.Q<TextField>("UpdateUsernameField");
+        UpdateScoreField = rootElement.Q<TextField>("UpdateScoreField");
+        DeleteIDField = rootElement.Q<TextField>("DeleteIDField");
 
         UnregisterCallbacks();
         RegisterCallbacks();
@@ -82,16 +98,23 @@ public class PlayerDisplayWindow : MonoBehaviour
     private void OnInsertClicked()
     {
         // Voeg hier de logica toe om een nieuwe speler in te voegen
+        OnRefreshClicked(); 
     }
 
     private void OnUpdateClicked()
     {
         // Voeg hier de logica toe om een speler bij te werken
+        Debug.Log("Clicked Update");
+        OnRefreshClicked();
+
     }
 
     private void OnDeleteClicked()
     {
+        Debug.Log("Clicked Delete");
         // Voeg hier de logica toe om een speler te verwijderen
+        OnRefreshClicked();
+
     }
 }
 
