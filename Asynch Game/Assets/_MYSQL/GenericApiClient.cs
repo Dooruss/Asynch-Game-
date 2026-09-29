@@ -97,7 +97,6 @@ public class GenericApiClient
 }
 
 // Requests.cs
-
 [System.Serializable]
 public abstract class RequestBase
 {
@@ -110,9 +109,28 @@ public class GetPlayersRequest : RequestBase
 
 }
 
-// Responses.cs
+[System.Serializable]
+public class CreatePlayerRequest : RequestBase
+{
+    public string username;
+    public int score;
+    public string favoriteUnit;
+}
 
-//using System.Collections.Generic;
+[System.Serializable]
+public class UpdatePlayerRequest : RequestBase
+{
+    public int id;
+    public int score;
+}
+
+[System.Serializable]
+public class DeletePlayerRequest : RequestBase
+{
+    public int id;
+}
+
+// Responses.cs
 
 [System.Serializable]
 public abstract class ResponseBase
@@ -126,6 +144,24 @@ public abstract class ResponseBase
 public class GetPlayersResponse : ResponseBase
 {
     public List<PlayerEntry> entries;
+}
+
+[System.Serializable]
+public class CreatePlayerResponse : ResponseBase
+{
+
+}
+
+[System.Serializable]
+public class UpdatePlayerResponse : ResponseBase
+{
+
+}
+
+[System.Serializable]
+public class DeletePlayerResponse : ResponseBase
+{
+
 }
 
 // PlayerEntry.cs

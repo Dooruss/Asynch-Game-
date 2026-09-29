@@ -1,33 +1,38 @@
 .root {
-	flex-grow: 1;
-	justify-content: center;
-	align-items: center;
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
 }
 
 .main-panel {
-	width: 800px;
-	height: 400px;
-	background-color: grey;
+    width: 800px;
+    height: 400px;
+    background-color: grey;
 }
 
 .player-list-scroll-view {
-	flex-grow: 1;
-	flex-shrink: 1;
+    flex-grow: 1;
+    flex-shrink: 1;
+    min-width: 0;
 }
 
 .row {
-	flex-direction: row;
-	margin: 5px;
-	background-color: dimgray;
+    flex-direction: row;
+    margin: 5px;
+    background-color: dimgray;
 }
 
 .row Label {
-	width: 250px;
+    width: 250px;
 }
 
 .refresh-button {
-	width: 100px;
-	height: 30px;
-	flex-shrink: 0;
-	align-self: center;
+    width: 100px;
+    height: 30px;
+    flex-shrink: 0;
+    align-self: center;
+}
+
+.Apple {
+    min-width: 0;
 }

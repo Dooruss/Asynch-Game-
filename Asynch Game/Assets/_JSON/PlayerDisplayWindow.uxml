@@ -1,9 +1,24 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/_JSON/PlayerDisplayWindow.uss?fileID=7433441132597879392&amp;guid=37e5f0d97c50df04db663a8543b27c21&amp;type=3#PlayerDisplayWindow"/>
     <ui:VisualElement name="Root" class="root">
-        <ui:VisualElement name="MainPanel" class="main-panel">
-            <ui:ScrollView name="PlayerListScrollView" class="player-list-scroll-view"/>
-            <ui:Button text="Refresh" name="RefreshButton" class="refresh-button"/>
+        <ui:VisualElement name="MainPanel" class="main-panel" style="height: 450px; width: 1146px;">
+            <ui:ScrollView name="PlayerListScrollView" class="player-list-scroll-view" style="flex-grow: 1; max-height: 250px;"/>
+            <ui:VisualElement name="InsertPanel" style="flex-grow: 1; flex-direction: column; align-items: flex-start; height: 1px; min-height: 1px; max-height: 50px; width: 1149px; background-color: rgb(124, 113, 113); flex-shrink: 0;">
+                <ui:TextField label="Name:" placeholder-text="filler text" name="Name_TextField" select-all-on-mouse-up="true" class="Apple" style="height: 37px; width: 291px; flex-direction: row; justify-content: flex-start; align-items: flex-start; align-content: auto; white-space: nowrap;"/>
+                <ui:TextField label="Score:" placeholder-text="filler text" name="Score_TextField" style="height: 40px; width: 315px; position: absolute; top: -4px; left: 295px; flex-direction: row; align-items: auto; justify-content: space-around; align-self: flex-start;"/>
+                <ui:Button text="Insert" name="InsertButton" class="refresh-button" style="position: absolute; top: 7px; left: 937px;"/>
+                <ui:TextField label="Favorite Unit" placeholder-text="filler text" name="FavoriteUnit_TextField" style="height: 37px; width: 291px; position: absolute; top: -1px; left: 620px;"/>
+            </ui:VisualElement>
+            <ui:VisualElement name="UpdatePanel" style="flex-grow: 1; flex-direction: column; align-items: flex-start; height: 1px; min-height: 1px; max-height: 50px; background-color: rgb(155, 134, 134); flex-shrink: 0;">
+                <ui:TextField label="Name:" placeholder-text="filler text" name="ID_TextField" select-all-on-mouse-up="true" style="height: 37px; width: 291px; flex-direction: row; justify-content: flex-start; align-items: flex-start; align-content: auto; white-space: nowrap;"/>
+                <ui:TextField label="Score:" placeholder-text="filler text" name="UpdatedScore_TextField" style="height: 40px; width: 315px; position: absolute; top: -4px; left: 295px; flex-direction: row; align-items: auto; justify-content: space-around; align-self: flex-start;"/>
+                <ui:Button text="Update" name="UpdateButton" class="refresh-button" style="position: absolute; top: 4px; left: 629px;"/>
+            </ui:VisualElement>
+            <ui:VisualElement name="DeletePanel" style="flex-grow: 1; flex-direction: column; align-items: flex-start; height: 1px; min-height: 1px; max-height: 50px; background-color: rgb(155, 152, 152); flex-shrink: 0;">
+                <ui:TextField label="ID:" placeholder-text="filler text" name="DeleteID_TextField" select-all-on-mouse-up="true" style="height: 37px; width: 291px; flex-direction: row; justify-content: flex-start; align-items: flex-start; align-content: auto; white-space: nowrap;"/>
+                <ui:Button text="Delete" name="DeleteButton" class="refresh-button" style="position: absolute; top: 2px; left: 315px;"/>
+            </ui:VisualElement>
+            <ui:Button text="Refresh" name="RefreshButton" class="refresh-button" style="flex-grow: 0;"/>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
