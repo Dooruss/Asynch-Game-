@@ -10,7 +10,7 @@
                 <ui:Button text="Insert" name="InsertButton" class="refresh-button" style="position: absolute; top: 7px; left: 937px;"/>
             </ui:VisualElement>
             <ui:VisualElement name="UpdatePanel" style="flex-grow: 1; flex-direction: column; align-items: flex-start; height: 1px; min-height: 1px; max-height: 50px; background-color: rgb(155, 134, 134); flex-shrink: 0;">
-                <ui:TextField label="Name:" placeholder-text="filler text" name="UpdateUsernameField" select-all-on-mouse-up="true" style="height: 37px; width: 291px; flex-direction: row; justify-content: flex-start; align-items: flex-start; align-content: auto; white-space: nowrap;"/>
+                <ui:TextField label="ID:" placeholder-text="filler text" name="UpdateIDField" select-all-on-mouse-up="true" style="height: 37px; width: 291px; flex-direction: row; justify-content: flex-start; align-items: flex-start; align-content: auto; white-space: nowrap;"/>
                 <ui:TextField label="Score:" placeholder-text="filler text" name="UpdateScoreField" style="height: 40px; width: 315px; position: absolute; top: -4px; left: 295px; flex-direction: row; align-items: auto; justify-content: space-around; align-self: flex-start;"/>
                 <ui:Button text="Update" name="UpdateButton" class="refresh-button" style="position: absolute; top: 4px; left: 629px;"/>
             </ui:VisualElement>

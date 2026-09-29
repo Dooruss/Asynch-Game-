@@ -1,3 +1,5 @@
+using System.Linq;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -19,7 +21,7 @@ public class PlayerDisplayWindow : MonoBehaviour
     private TextField InsertScoreField;
     private TextField InsertFavoriteUnitField;
     //update
-    private TextField UpdateUsernameField;
+    private TextField UpdateIDField;
     private TextField UpdateScoreField;
     //delete
     private TextField DeleteIDField;
@@ -51,7 +53,7 @@ public class PlayerDisplayWindow : MonoBehaviour
         InsertUsernameField = rootElement.Q<TextField>("InsertUsernameField");
         InsertScoreField = rootElement.Q<TextField>("InsertScoreField");
         InsertFavoriteUnitField = rootElement.Q<TextField>("InsertFavoriteUnitField");
-        UpdateUsernameField = rootElement.Q<TextField>("UpdateUsernameField");
+        UpdateIDField = rootElement.Q<TextField>("UpdateIDField");
         UpdateScoreField = rootElement.Q<TextField>("UpdateScoreField");
         DeleteIDField = rootElement.Q<TextField>("DeleteIDField");
 
@@ -97,22 +99,89 @@ public class PlayerDisplayWindow : MonoBehaviour
 
     private void OnInsertClicked()
     {
-        // Voeg hier de logica toe om een nieuwe speler in te voegen
-        OnRefreshClicked(); 
+        // Lees invoer uit de velden
+        string username = InsertUsernameField?.value?.Trim();
+        string scoreText = InsertScoreField?.value?.Trim();
+        string favoriteUnit = InsertFavoriteUnitField?.value?.Trim();
+
+        if (RoyalData == null)
+        {
+            RoyalData = new playerData { entries = new entries[0] };
+        }
+
+        if (!int.TryParse(scoreText, out int score))
+        {
+            // fallback naar 0 als parsing niet lukt
+            score = 0;
+        }
+
+        int newId = 1;
+        if (RoyalData.entries != null && RoyalData.entries.Length > 0)
+        {
+            newId = RoyalData.entries.Max(e => e.ID) + 1;
+        }
+
+        var newEntry = new entries
+        {
+            ID = newId,
+            username = username,
+            score = score,
+            favoriteUnit = favoriteUnit
+        };
+
+        var list = new List<entries>(RoyalData.entries ?? new entries[0]);
+        list.Add(newEntry);
+        RoyalData.entries = list.ToArray();
+
+        // Optioneel: reset invoervelden
+        InsertUsernameField.value = string.Empty;
+        InsertScoreField.value = string.Empty;
+        InsertFavoriteUnitField.value = string.Empty;
+
+        Debug.Log($"Inserted player: {newEntry.username} (ID={newEntry.ID})");
+
+        OnRefreshClicked();
     }
 
     private void OnUpdateClicked()
     {
         // Voeg hier de logica toe om een speler bij te werken
-        Debug.Log("Clicked Update");
+        string idText = UpdateIDField?.value?.Trim();
+        string scoreText = UpdateScoreField?.value?.Trim();
+
+        if (!int.TryParse(idText, out int id))
+        {
+            Debug.LogError("Invalid ID for update.");
+            return;
+        }
+
+        RoyalData.entries = RoyalData.entries.Select(entry =>
+        {
+            if (entry.ID == id)
+            {
+                if (int.TryParse(scoreText, out int newScore))
+                {
+                    entry.score = newScore;
+                }
+            }
+            return entry;
+        }).ToArray();
+
+        UpdateIDField.value = string.Empty;
+        UpdateScoreField.value = string.Empty;
         OnRefreshClicked();
 
     }
 
     private void OnDeleteClicked()
     {
-        Debug.Log("Clicked Delete");
         // Voeg hier de logica toe om een speler te verwijderen
+        string idText = DeleteIDField?.value?.Trim();
+
+      RoyalData.entries = RoyalData.entries.Where(entry => entry.ID.ToString() != idText).ToArray();
+
+        DeleteIDField.value = string.Empty;
+        Debug.Log("Clicked Delete");
         OnRefreshClicked();
 
     }
