@@ -60,6 +60,16 @@ public class GenericApiClient
         };
         return await SendRequest<CreatePlayerResponse>(request);
     }
+
+    public async Awaitable<DeletePlayerResponse> DeletePlayer(int id)
+    {
+        DeletePlayerRequest request = new DeletePlayerRequest
+        {
+            action = "delete_player",
+            id = id
+        };
+        return await SendRequest<DeletePlayerResponse>(request);
+    }
     // De generieke SendRequest method
     private async Awaitable<TResponse> SendRequest<TResponse>(object requestData)
         where TResponse : ResponseBase

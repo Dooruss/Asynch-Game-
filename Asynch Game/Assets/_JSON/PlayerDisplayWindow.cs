@@ -210,15 +210,38 @@ public class PlayerDisplayWindow : MonoBehaviour
         }
     }
 
+    private async Awaitable DeletePlayerAndRefreshAsync(int id)
+    {
+        var deleteResponse = await GenericApiClient.Instance.DeletePlayer(id);
+        if (deleteResponse == null)
+        {
+            Debug.LogError("Delete request failed or returned no response.");
+            return;
+        }
+        if (!deleteResponse.success)
+        {
+            Debug.LogError($"Delete failed: {deleteResponse.message} {deleteResponse.error}");
+            return;
+        }
+        // After successful delete, fetch latest players and refresh UI
+        getPlayersResponse = await GenericApiClient.Instance.GetPlayers();
+        scrollView?.Clear();
+        if (getPlayersResponse != null)
+        {
+            Refresh(getPlayersResponse);
+        }
+    }
+
     private void OnDeleteClicked()
     {
         // Voeg hier de logica toe om een speler te verwijderen
         string idText = DeleteIDField?.value?.Trim();
 
-      RoyalData.entries = RoyalData.entries.Where(entry => entry.ID.ToString() != idText).ToArray();
 
         DeleteIDField.value = string.Empty;
-        Debug.Log("Clicked Delete");
+        _ = DeletePlayerAndRefreshAsync(int.Parse(idText));
+        DeleteIDField.value = string.Empty;
+
         OnRefreshClicked();
 
     }
